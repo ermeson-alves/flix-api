@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from genres.views import genre_create_list_view, genre_detail_update_delete_view, \
 GenreListCreateView, GenreDetailUpdateDeleteView
+from actors.views import ActorListCreateView, ActorDetailUpdateDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,5 +12,8 @@ urlpatterns = [
     # DRF:
     path('genres-drf/', GenreListCreateView.as_view(), name='genre-list-drf'),
     path('genres-drf/<int:pk>/', GenreDetailUpdateDeleteView.as_view(), name='genre-detail-drf'),
+    # actors urls:
+    path('actors/', ActorListCreateView.as_view()),
+    path('actors/<int:pk>/', ActorDetailUpdateDeleteView.as_view()),
 
 ]
