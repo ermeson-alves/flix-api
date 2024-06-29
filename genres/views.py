@@ -1,10 +1,26 @@
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from genres.models import Genre
 from django.shortcuts import get_object_or_404
+from rest_framework import generics
+from genres.models import Genre
+from genres.serializers import GenreSerializer
 # STATUS CODE: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
+
+# COM DJANGO REST FRAMEWORK #############################################
+class GenreListCreateView(generics.ListCreateAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
+class GenreDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Genre.objects.all()
+    serializer_class = GenreSerializer
+
+
+
+# APENAS COM DJANGO #############################################
 @csrf_exempt # csrf token
 def genre_create_list_view(request):
     if request.method == 'GET':
@@ -42,5 +58,5 @@ def genre_detail_update_delete_view(request, pk):
         genre.delete()
         return JsonResponse(
             {'message': 'Gênero excluído!'},
-            status=204,
+            status=204, # status p/ No content
         )
