@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django_countries',
     'genres',
     'actors',
+    'movies',
 ]
 
 MIDDLEWARE = [
