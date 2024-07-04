@@ -15,6 +15,7 @@ urlpatterns = [
     # path('genres/', GenreListCreateView.as_view(), name='genre-list-create'),
     # path('genres/<int:pk>/', GenreDetailUpdateDeleteView.as_view(), name='genre-detail'),
     
+    path('api/v1/', include('authentication.urls')), # url que serve para gerar token
     path('api/v1/', include('genres.urls')),
     path('api/v1/', include('actors.urls')),
     path('api/v1/', include('movies.urls')),

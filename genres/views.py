@@ -3,18 +3,21 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from genres.models import Genre
 from genres.serializers import GenreModelSerializer
 # STATUS CODE: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
 
 # COM DJANGO REST FRAMEWORK #############################################
-class GenreListCreateView(generics.ListCreateAPIView):
+class GenreListCreateView(generics.ListCreateAPIView): 
+    permission_classes = (IsAuthenticated,)
     queryset = Genre.objects.all()
     serializer_class = GenreModelSerializer
 
 
 class GenreDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Genre.objects.all()
     serializer_class = GenreModelSerializer
 
