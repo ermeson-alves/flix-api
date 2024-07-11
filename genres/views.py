@@ -6,18 +6,20 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from genres.models import Genre
 from genres.serializers import GenreModelSerializer
+# from genres.permissions import GenrePermissionClass
+from app.permissions import GlobalDefaultPermissions
 # STATUS CODE: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
 
 # COM DJANGO REST FRAMEWORK #############################################
 class GenreListCreateView(generics.ListCreateAPIView): 
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermissions, ) # lista de classes de permissão
     queryset = Genre.objects.all()
     serializer_class = GenreModelSerializer
 
 
 class GenreDetailUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalDefaultPermissions, )
     queryset = Genre.objects.all()
     serializer_class = GenreModelSerializer
 
